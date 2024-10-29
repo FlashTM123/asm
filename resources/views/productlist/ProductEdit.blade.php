@@ -1,5 +1,5 @@
 @vite(["resources/sass/app.scss", "resources/js/app.js"])
-
+@include("Menu")
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 shadow" style="width: 500px;">
         <h4 class="mb-4 text-center">Edit Product</h4>

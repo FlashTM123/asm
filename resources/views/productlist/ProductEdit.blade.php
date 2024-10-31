@@ -1,5 +1,11 @@
-@vite(["resources/sass/app.scss", "resources/js/app.js"])
-@include("Menu")
+@extends('app')
+
+@section('title', 'Product')
+
+@section('content')
+    <div class="d-flex">
+        @include("navbar.navbar")
+    </div>
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4 shadow" style="width: 500px;">
         <h4 class="mb-4 text-center">Edit Product</h4>
@@ -26,16 +32,33 @@
             </div>
 
             <!-- Imported Date -->
-            <div class="mb-3">
-                <label for="imported_date" class="form-label">Imported Date</label>
-                <input type="datetime-local" name="imported_date" value="{{ \Carbon\Carbon::parse($product->imported_date)->format('Y-m-d\TH:i') }}" id="imported_date" class="form-control" required>
-            </div>
+
 
             <!-- Image Upload -->
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 <input type="text" name="image" id="image"  value="{{ $product->image }}" class="form-control" required>
             </div>
+            <div class="mb-3">
+                <label for="height" class="form-label">Height</label>
+                <input type="number" name="height" id="height" value="{{$product -> height}}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="watering_time_per_day" class="form-label">Watering_time_per_day</label>
+                <input type="number" name="watering_time_per_day" id="watering_time_per_day" value="{{$product->watering_time_per_day}}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="category_id" class="form-label">Category</label>
+                <select name="category_id" id="category_id" class="form-control" required>
+                    <option value="">Select a category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->category_name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
 
             <!-- Save Button -->
             <div class="d-grid">
@@ -44,3 +67,4 @@
         </form>
     </div>
 </div>
+@endsection

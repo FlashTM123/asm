@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-class AdminController
-{
+use Illuminate\Http\Request;
 
+class AdminController extends Controller
+{
+    public function index()
+    {
+        return view('admin.admin'); // Đảm bảo tên này đúng với vị trí file
+    }
 }

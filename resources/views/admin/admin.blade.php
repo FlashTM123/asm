@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>@yield('title', 'Admin Dashboard')</title>
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    @yield('css')
-</head>
-<body>
-<nav>
-    <!-- Nội dung của phần nav -->
-    @include('navbar.navbar')
+@extends('app')
 
-</nav>
+@section('title', 'Admin Page')
 
-<section class="dashboard">
-    @yield('content')
-    @include('dashboard.dashboard')
-</section>
-
-<script src="{{ asset('js/admin.js') }}"></script>
-@yield('js')
-</body>
-</html>
+@section('content')
+    <div class="container mt-5">
+        <h1 class="text-center">Chào mừng bạn đến với trang Admin</h1>
+        <p class="text-center mt-3">Hãy sử dụng các công cụ quản trị để quản lý hệ thống một cách dễ dàng.</p>
+    </div>
+@endsection

@@ -1,204 +1,218 @@
-/* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-*{
+/* Importing Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
-:root{
-    /* ===== Colors ===== */
-    --primary-color: #0E4BF1;
-    --panel-color: #FFF;
-    --text-color: #000;
-    --black-light-color: #707070;
-    --border-color: #e6e5e5;
-    --toggle-color: #DDD;
-    --box1-color: #4DA3FF;
-    --box2-color: #FFE6AC;
-    --box3-color: #E7D1FC;
-    --title-icon-color: #fff;
-
-    /* ====== Transition ====== */
-    --tran-05: all 0.5s ease;
-    --tran-03: all 0.3s ease;
-    --tran-03: all 0.2s ease;
+body {
+    height: 100vh;
+    width: 100%;
+    background-image: url("");
+    background-position: center;
+    background-size: cover;
 }
 
-body{
-    min-height: 100vh;
-    background-color: var(--primary-color);
-}
-body.dark{
-    --primary-color: #3A3B3C;
-    --panel-color: #242526;
-    --text-color: #CCC;
-    --black-light-color: #CCC;
-    --border-color: #4D4C4C;
-    --toggle-color: #FFF;
-    --box1-color: #3A3B3C;
-    --box2-color: #3A3B3C;
-    --box3-color: #3A3B3C;
-    --title-icon-color: #CCC;
-}
-/* === Custom Scroll Bar CSS === */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #0b3cc1;
-}
-
-body.dark::-webkit-scrollbar-thumb:hover,
-body.dark .activity-data::-webkit-scrollbar-thumb:hover{
-    background: #3A3B3C;
-}
-
-nav{
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
+    width: 110px;
     height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background-color: var(--panel-color);
-    border-right: 1px solid var(--border-color);
-    transition: var(--tran-05);
-}
-nav.close{
-    width: 73px;
-}
-nav .logo-name{
     display: flex;
     align-items: center;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(17px);
+    --webkit-backdrop-filter: blur(17px);
+    border-right: 1px solid rgba(255, 255, 255, 0.7);
+    transition: width 0.3s ease;
 }
-nav .logo-image{
+
+.sidebar:hover {
+    width: 260px;
+}
+
+.sidebar .logo {
+    color: #000;
     display: flex;
-    justify-content: center;
-    min-width: 45px;
+    align-items: center;
+    padding: 25px 10px 15px;
 }
-nav .logo-image img{
-    width: 40px;
-    object-fit: cover;
+
+.logo img {
+    width: 43px;
     border-radius: 50%;
 }
 
-nav .logo-name .logo_name{
-    font-size: 22px;
+.logo h2 {
+    font-size: 1.15rem;
     font-weight: 600;
-    color: var(--text-color);
-    margin-left: 14px;
-    transition: var(--tran-05);
+    margin-left: 15px;
+    display: none;
 }
-nav.close .logo_name{
-    opacity: 0;
-    pointer-events: none;
+
+.sidebar:hover .logo h2 {
+    display: block;
 }
-nav .menu-items{
-    margin-top: 40px;
-    height: calc(100% - 90px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.menu-items li{
+
+.sidebar .links {
     list-style: none;
+    margin-top: 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    height: calc(100% - 140px);
 }
-.menu-items li a{
+
+.sidebar .links::-webkit-scrollbar {
+    display: none;
+}
+
+.links li {
     display: flex;
+    border-radius: 4px;
     align-items: center;
-    height: 50px;
-    text-decoration: none;
-    position: relative;
 }
-.nav-links li a:hover:before{
-    content: "";
-    position: absolute;
-    left: -7px;
-    height: 5px;
-    width: 5px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-}
-body.dark li a:hover:before{
-    background-color: var(--text-color);
-}
-.menu-items li a i{
-    font-size: 24px;
-    min-width: 45px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--black-light-color);
-}
-.menu-items li a .link-name{
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--black-light-color);
-    transition: var(--tran-05);
-}
-nav.close li a .link-name{
-    opacity: 0;
-    pointer-events: none;
-}
-.nav-links li a:hover i,
-.nav-links li a:hover .link-name{
-    color: var(--primary-color);
-}
-body.dark .nav-links li a:hover i,
-body.dark .nav-links li a:hover .link-name{
-    color: var(--text-color);
-}
-.menu-items .logout-mode{
-    padding-top: 10px;
-    border-top: 1px solid var(--border-color);
-}
-.menu-items .mode{
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-.menu-items .mode-toggle{
-    position: absolute;
-    right: 14px;
-    height: 50px;
-    min-width: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.links li:hover {
     cursor: pointer;
+    background: #fff;
 }
-.mode-toggle .switch{
-    position: relative;
-    display: inline-block;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
+
+.links h4 {
+    color: #222;
+    font-weight: 500;
+    display: none;
+    margin-bottom: 10px;
 }
-.switch:before{
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 15px;
-    width: 15px;
-    background-color: var(--panel-color);
-    border-radius: 50%;
-    transition: var(--tran-03);
+
+.sidebar:hover .links h4 {
+    display: block;
 }
-body.dark .switch:before{
-    left: 20px;
+
+.links hr {
+    margin: 10px 8px;
+    border: 1px solid #4c4c4c;
 }
+
+.sidebar:hover .links hr {
+    border-color: transparent;
+}
+
+.links li span {
+    padding: 12px 10px;
+}
+
+.links li a {
+    padding: 10px;
+    color: #000;
+    display: none;
+    font-weight: 500;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sidebar:hover .links li a {
+    display: block;
+}
+
+.links .logout-link {
+    margin-top: 20px;
+}
+/* Dashboard Widget Styling */
+.widget {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.widget-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+}
+
+.widget .bg-primary { background-color: #007bff !important; }
+.widget .bg-warning { background-color: #ffc107 !important; }
+.widget .bg-success { background-color: #28a745 !important; }
+.widget .bg-danger { background-color: #dc3545 !important; }
+.widget .bg-info { background-color: #17a2b8 !important; }
+
+.widget-text {
+    margin-left: 15px;
+}
+
+.widget-text h5 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.page-header {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .widget-text h5 {
+        font-size: 1.25rem;
+    }
+
+    .widget-icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+/*Product*/
+body {
+    background-color: #f8f9fa; /* Màu nền nhẹ */
+}
+
+h2 {
+    color: #007bff; /* Màu tiêu đề */
+}
+
+.alert {
+    margin-bottom: 20px; /* Khoảng cách dưới thông báo */
+}
+
+.form-control {
+    border-radius: 0.25rem; /* Bo góc cho các trường nhập liệu */
+}
+
+.btn {
+    margin-top: 10px; /* Khoảng cách trên cho nút */
+}
+/* app.css */
+
+/* Tùy chỉnh cho card */
+.custom-card {
+    border: 2px solid #007bff; /* Đường viền màu xanh */
+    border-radius: 15px; /* Bo góc cho card */
+}
+
+.card-header {
+    font-size: 1.5rem; /* Kích thước chữ lớn hơn cho tiêu đề */
+}
+
+.card-body {
+    background-color: #f8f9fa; /* Nền sáng cho body của card */
+}
+
+.card-text {
+    color: #333; /* Màu chữ cho tổng số sản phẩm */
+}
+
+.card-footer {
+    background-color: #e9ecef; /* Màu nền cho footer */
+    font-style: italic; /* In nghiêng cho footer */
+}
+

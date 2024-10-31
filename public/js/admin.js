@@ -22,11 +22,22 @@ modeToggle.addEventListener("click", () =>{
     }
 });
 
-sidebarToggle.addEventListener("click", () => {
-    sidebar.classList.toggle("close");
-    if(sidebar.classList.contains("close")){
-        localStorage.setItem("status", "close");
-    }else{
-        localStorage.setItem("status", "open");
-    }
-})
+// sidebarToggle.addEventListener("click", () => {
+//     sidebar.classList.toggle("close");
+//     if(sidebar.classList.contains("close")){
+//         localStorage.setItem("status", "close");
+//     }else{
+//         localStorage.setItem("status", "open");
+//     }
+// })
+
+
+    const toggleBtn = document.querySelector(".toggle-btn");
+    const nav = document.querySelector("nav");
+
+    toggleBtn.addEventListener("click", () => {
+    nav.classList.toggle("collapsed");
+});
+
+
+

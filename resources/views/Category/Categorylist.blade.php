@@ -1,51 +1,57 @@
+@extends('app')
 
-@vite(["resources/sass/app.scss", "resources/js/app.js"])
-@include("Menu")
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-12">
-            <h3 class="text-center mb-4">Category</h3>
-        </div>
+@section('title', "Category")
+
+@section('content')
+    <div class="d-flex">
+        @include("navbar.navbar")
     </div>
-
-    <div class="row mb-3">
-        <div class="col-12 text-start">
-            <a href="/category-add" class="btn btn-success btn-sm">Add new category</a>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center mb-4">Category</h3>
+            </div>
         </div>
-    </div>
 
+        <div class="row mb-3">
+            <div class="col-12 text-start">
+                <a href="{{ url('/category-add') }}" class="btn btn-success btn-sm">Add new category</a>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-striped table-hover table-bordered align-middle text-center">
-                <thread class="table-success">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped table-hover table-bordered align-middle text-center">
+                    <thead class="table-success">
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
-
-                        <th></th>
+                        <th>Action</th>
                     </tr>
-                    @foreach($listcategory as  $obj)
-                        <td>{{$obj -> id}}</td>
-                        <td>{{$obj -> name}}</td>
-                        <td>{{$obj -> description}}</td>
-                        <td>
-                            <form action="{{ url('/category-edit/' . $obj->id) }}" style="display:inline-block;">
-                                <button type="submit" class="btn btn-success btn-sm">Edit</button>
-                            </form>
+                    </thead>
+                    <tbody>
+                    @foreach($listcategory as $obj)
+                        <tr>
+                            <td>{{ $obj->id }}</td>
+                            <td>{{ $obj->category_name }}</td>
+                            <td>{{ $obj->category_desc }}</td>
+                            <td>
+                                <form action="{{ url('/category-edit/' . $obj->id) }}" style="display:inline-block;">
+                                    <button type="submit" class="btn btn-success btn-sm">Edit</button>
+                                </form>
 
-                            <form action="{{ url('/category-list/delete/' . $obj->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-
-                        </td>
+                                <form action="{{ url('/category-list/delete/' . $obj->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
                     @endforeach
-                </thread>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-
+@endsection

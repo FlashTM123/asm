@@ -1,34 +1,67 @@
-@vite(["resources/sass/app.scss", "resources/js/app.js"])
-@include("Menu")
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4 shadow" style="width: 400px;">
-        <h4 class="mb-4 text-center">Add Product</h4>
-        <form action="/product-save" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-3">
-                <label for="productName" class="form-label">Product Name</label>
-                <input type="text" name="productName" id="productName" class="form-control" placeholder="Enter product name" required>
+@extends('app')
+
+@section('title', 'Add Product')
+
+@section('content')
+    <div class="d-flex">
+        @include("navbar.navbar")
+    </div>
+
+    <div class="container mt-lg-4">
+        <h2 class="text-center mb-4">Add Product</h2>
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
+        @endif
+
+        <form action="{{ route('product.save') }}" method="POST" class="border p-4 rounded shadow-sm">
+            @csrf
+
+            <div class="mb-3">
+                <label for="product_name" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" required>
+            </div>
+
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="text" name="price" id="price" class="form-control" placeholder="Enter product price" required>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" required>
             </div>
+
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea name="description" id="description" class="form-control" placeholder="Enter product description" rows="3" required></textarea>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
             </div>
-            <div class="mb-3">
-                <label for="importedDate" class="form-label">Imported Date</label>
-                <input type="date" name="importedDate" id="importedDate" class="form-control" required>
-            </div>
+
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
-                <input type="text" name="image" id="image" class="form-control" required>
+                <input type="text" class="form-control" id="image" name="image" required>
             </div>
-            <!-- Nút Save được căn giữa -->
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-block">Save</button>
+
+            <div class="mb-3">
+                <label for="height" class="form-label">Height (Cm)</label>
+                <input type="number" class="form-control" id="height" name="height" required>
             </div>
+
+            <div class="mb-3">
+                <label for="watering_time_per_day" class="form-label">Watering times per day</label>
+                <input type="number" class="form-control" id="watering_time_per_day" name="watering_time_per_day" required>
+            </div>
+
+            <!-- Phần danh mục -->
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select id="category" name="category_id" class="form-select" required>
+                    <option value="" disabled selected>Select a category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+            <a href="{{ route('product.list') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
-</div>
+@endsection

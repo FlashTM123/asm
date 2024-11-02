@@ -51,6 +51,7 @@
                             <th>Height (cm)</th>
                             <th>Watering Times/Day</th>
                             <th>Category</th>
+                            <th>Status</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>
@@ -65,6 +66,13 @@
                                 <td>{{ $product->height }} cm</td>
                                 <td>{{ $product->watering_time_per_day }}</td>
                                 <td>{{ $product->category_name }}</td>
+                                <td>
+                                    @if($product->status == 'active')
+                                        <span class="text text-success">Active</span>
+                                    @elseif($product->status == 'inactive')
+                                        <span class="text text-danger">Inactive</span>
+                                    @endif
+                                </td>
                                 <td><img src="{{ $product->image }}" alt="Product Image" class="img-fluid" style="max-width: 150px;"></td>
                                 <td>
                                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-success me-1">Edit</a>

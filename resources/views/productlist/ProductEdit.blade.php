@@ -58,6 +58,13 @@
                     @endforeach
                 </select>
             </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select name="status" id="status" class="form-control" required>
+                    <option value="active" {{$product->status == 'active' ? 'selected' : ''}} class="text text-success">Active</option>
+                    <option value="inactive" {{$product->status == 'inactive' ? 'selected' : ''}} class="text text-danger">Inactive</option>
+                </select>
+            </div>
 
 
             <!-- Save Button -->

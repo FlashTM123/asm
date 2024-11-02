@@ -26,7 +26,7 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" required>
             </div>
 
             <div class="mb-3">
@@ -59,7 +59,14 @@
                     @endforeach
                 </select>
             </div>
-
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-select" required>
+                    <option value="" disabled selected>Select a status</option>
+                    <option value="Active" class="text text-success">Active</option>
+                    <option value="Inactive" class="text text-danger">Inactive</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Add</button>
             <a href="{{ route('product.list') }}" class="btn btn-secondary">Cancel</a>
         </form>

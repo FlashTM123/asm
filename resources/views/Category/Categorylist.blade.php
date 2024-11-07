@@ -27,6 +27,8 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Created_at</th>
+                        <th>Updated_at</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -36,6 +38,8 @@
                             <td>{{ $obj->id }}</td>
                             <td>{{ $obj->category_name }}</td>
                             <td>{{ $obj->category_desc }}</td>
+                            <td>{{ \Carbon\Carbon::parse($obj->created_at)->setTimezone('Asia/Bangkok')->format('Y-m-d H:i:s') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($obj->updated_at)->setTimezone('Asia/Bangkok')->format('Y-m-d H:i:s') }}</td>
                             <td>
                                 <form action="{{ url('/category-edit/' . $obj->id) }}" style="display:inline-block;">
                                     <button type="submit" class="btn btn-success btn-sm">Edit</button>

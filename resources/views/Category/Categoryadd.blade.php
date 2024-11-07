@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'Add Product')
+@section('title', 'Add Category')
 
 @section('content')
     <div class="d-flex">

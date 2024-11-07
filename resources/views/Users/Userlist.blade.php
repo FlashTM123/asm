@@ -6,7 +6,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <h3 class="text-center mb-4">User List</h3>
+                <h3 class="page-header text-center mb-4">User List</h3>
             </div>
         </div>
         <div class="row mb-3">
@@ -25,7 +25,10 @@
                             <th>Name</th>
                             <th>Phone</th>
                             <th>Email</th>
+                            <th>Password</th>
                             <th>Role</th>
+                            <th>Create_at</th>
+                            <th>Update_at</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -36,7 +39,11 @@
                                 <td>{{ $user->Name }}</td>
                                 <td>{{ $user->Phone }}</td>
                                 <td>{{ $user->Email }}</td>
+                                <td>{{$user->Password}}</td>
                                 <td>{{ ucfirst($user->Role) }}</td>
+                                <td>{{ \Carbon\Carbon::parse($user->created_at)->setTimezone('Asia/Bangkok')->format('Y-m-d H:i:s') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($user->updated_at)->setTimezone('Asia/Bangkok')->format('Y-m-d H:i:s') }}</td>
+
                                 <td>
                                     <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-warning me-1">Edit</a>
                                     <form action="{{route('user.delete',$user->id)}}" method="POST" style="display: inline-block">

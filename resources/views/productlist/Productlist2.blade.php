@@ -14,13 +14,11 @@
             </div>
         </div>
 
-
         <div class="row mb-3">
             <div class="col-12 text-start">
                 <a href="{{ route('product.add') }}" class="btn btn-success">Add New Product</a>
             </div>
         </div>
-
 
         <div class="row mb-3">
             <div class="col-12">
@@ -37,11 +35,10 @@
             </div>
         </div>
 
-
         <div class="row">
-            <div class="col-12">
+            <div class="col-14">
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered align-middle text-center">
+                    <table class="table table-striped table-hover table-bordered align-middle text-center" style="font-size: 14px;">
                         <thead class="table-dark">
                         <tr>
                             <th>ID</th>
@@ -53,6 +50,8 @@
                             <th>Category</th>
                             <th>Status</th>
                             <th>Image</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -62,24 +61,24 @@
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ number_format($product->price) }} VND</td>
-                                <td>{{ $product->description }}</td>
+                                <td class="text-truncate" style="max-width: 150px;">{{ $product->description }}</td>
                                 <td>{{ $product->height }} cm</td>
                                 <td>{{ $product->watering_time_per_day }}</td>
                                 <td>{{ $product->category_name }}</td>
                                 <td>
-                                    @if($product->status == 'active')
-                                        <span class="text text-success">Active</span>
-                                    @elseif($product->status == 'inactive')
-                                        <span class="text text-danger">Inactive</span>
-                                    @endif
+                                    <span class="badge {{ $product->status == 'active' ? 'bg-success' : 'bg-danger' }}">
+                                        {{ ucfirst($product->status) }}
+                                    </span>
                                 </td>
-                                <td><img src="{{ $product->image }}" alt="Product Image" class="img-fluid" style="max-width: 150px;"></td>
+                                <td><img src="{{ $product->image }}" alt="Product Image" class="img-fluid rounded" style="max-width: 80px;"></td>
+                                <td>{{ \Carbon\Carbon::parse($product->created_at)->setTimezone('Asia/Bangkok')->format('Y-m-d H:i:s') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($product->updated_at)->setTimezone('Asia/Bangkok')->format('Y-m-d H:i:s') }}</td>
                                 <td>
-                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-success me-1">Edit</a>
+                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-outline-success me-1">Edit</a>
                                     <form action="{{ route('product.delete', $product->id) }}" method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                     </form>
                                 </td>
                             </tr>

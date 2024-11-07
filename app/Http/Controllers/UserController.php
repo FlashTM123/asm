@@ -30,7 +30,7 @@ class UserController extends Controller
                 'Role' => 'required|string|in:user,admin',
             ]);
 
-            $validatedData['Password'] = bcrypt($validatedData['Password']);
+
 
 
             DB::table('users')->insert([
@@ -40,6 +40,7 @@ class UserController extends Controller
                 'password' => $validatedData['Password'],
                 'address' => $validatedData['Address'],
                 'role' => $validatedData['Role'],
+                'created_at' => now(),
             ]);
 
 
@@ -55,25 +56,26 @@ class UserController extends Controller
     }
 
     public function update(\Illuminate\Http\Request $request) {
-        // Lấy ID từ request
-        $id = $request->input('id'); // Hoặc bạn có thể truyền $id vào phương thức
 
-        // Xác thực dữ liệu đầu vào
+        $id = $request->input('id');
         $validatedData = $request->validate([
             'Name' => 'required|string|max:255',
             'Phone' => 'required|string|max:15',
-            'Email' => 'required|string|email|max:255|unique:users,Email,' . $id,
+            'Email' => 'required|string|max:255',
+            'Password' => 'required|string|min:6',
             'Address' => 'nullable|string|max:255',
             'Role' => 'required|string|in:user,admin',
         ]);
 
-        // Cập nhật thông tin người dùng
+
         DB::table('users')->where('id', $id)->update([
             'Name' => $validatedData['Name'],
             'Phone' => $validatedData['Phone'],
             'Email' => $validatedData['Email'],
+            'Password' => $validatedData['Password'],
             'Address' => $validatedData['Address'],
             'Role' => $validatedData['Role'],
+            'updated_at' => now(),
         ]);
 
         // Chuyển hướng về danh sách người dùng với thông báo thành công

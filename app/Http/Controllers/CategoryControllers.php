@@ -28,6 +28,7 @@ class CategoryControllers extends Controller
         DB::table("category")->insert([
             "category_name" => $CategoryName,
             "category_desc" => $description,
+            "created_at"=>now(),
         ]);
 
         return redirect()->route('category.list')->with('success', 'Category added successfully!');
@@ -52,6 +53,7 @@ class CategoryControllers extends Controller
             ->update([
                 "category_name" => $CategoryName,
                 "category_desc" => $description,
+                "updated_at"=>now(),
             ]);
 
         return redirect()->route('category.list')->with('success', 'Category updated successfully!');

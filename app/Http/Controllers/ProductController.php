@@ -49,7 +49,6 @@ class ProductController extends Controller
     }
     public function save(Request $request)
     {
-
         $request->validate([
             'product_name' => 'required|string|max:255',
             'price' => 'required|numeric',
@@ -58,9 +57,13 @@ class ProductController extends Controller
             'height' => 'required|numeric',
             'watering_time_per_day' => 'required|integer',
             'category_id' => 'required|exists:category,id',
+            'status' => 'required|in:Active,Inactive',
         ]);
 
+        // In ra thông tin để kiểm tra
+        info("Dữ liệu sau khi xác thực:", $request->all());
 
+        // Thực hiện thêm vào cơ sở dữ liệu
         DB::table('product')->insert([
             'product_name' => $request->product_name,
             'price' => $request->price,
@@ -69,10 +72,13 @@ class ProductController extends Controller
             'height' => $request->height,
             'watering_time_per_day' => $request->watering_time_per_day,
             'category_id' => $request->category_id,
+            'status' => strtolower($request->status),
+            'created_at' => now(),
         ]);
 
         return redirect()->route('product.list')->with('success', 'Product added successfully!');
     }
+
 
 
 
@@ -91,6 +97,7 @@ class ProductController extends Controller
         $height = $request -> height;
         $watering_time_per_day = $request-> watering_time_per_day;
         $category_id = $request-> category_id;
+        $status = $request-> status;
         DB::table('product')
             ->where('id', $id)
             ->update([
@@ -101,6 +108,8 @@ class ProductController extends Controller
                 'height' => $height,
                 'watering_time_per_day' => $watering_time_per_day,
                 'category_id' => $category_id,
+                'status' => $status,
+                'updated_at'=>now(),
             ]);
 
         return redirect()->route('product.list');

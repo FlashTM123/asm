@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    // Thêm kiểu trả về là View
     public function getAllUsers()
     {
         $users = DB::table('users')->get();
@@ -22,7 +21,7 @@ class UserController extends Controller
         try {
 
             $validatedData = $request->validate([
-                'Name' => 'required|string|max:255',
+                'Name' => 'required|string|max:255|unique:users',
                 'Phone' => 'required|string|max:15',
                 'Email' => 'required|string|email|max:255|unique:users',
                 'Password' => 'required|string|min:6',
@@ -78,7 +77,7 @@ class UserController extends Controller
             'updated_at' => now(),
         ]);
 
-        // Chuyển hướng về danh sách người dùng với thông báo thành công
+
         return redirect()->route('user.list')->with('success', 'User updated successfully!');
     }
 

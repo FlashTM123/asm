@@ -17,7 +17,10 @@ class DashboardController extends Controller
 
         $totalUsers = DB::table('users')->count();
 
+        $totalCustomers = DB::table('customers')->count();
+
+        $totalOrders = DB::table('orders')->count();
         // Truyền cả hai biến vào view
-        return view('dashboard.dashboard', compact('totalProducts', 'totalCategories', 'totalUsers'));
+        return view('dashboard.dashboard', compact('totalProducts', 'totalCategories', 'totalUsers', 'totalCustomers', 'totalOrders'));
     }
 }
